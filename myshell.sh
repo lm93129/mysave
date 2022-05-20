@@ -89,7 +89,6 @@ tee /etc/docker/daemon.json <<-'EOF'
   "max-concurrent-downloads": 10,
   "max-concurrent-uploads": 10,
   "registry-mirrors": [
-    "https://dockerhub.azk8s.cn",
     "https://reg-mirror.qiniu.com"
     ]
 }
@@ -99,8 +98,7 @@ systemctl daemon-reload;
 systemctl restart docker;
 echo '******docker已启动******';
 echo '******安装docker compose******';
-curl -L "https://github.com/docker/compose/releases/download/v2.2.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose;
-chmod +x /usr/local/bin/docker-compose;
+yum -y install docker-compose-plugin;
 echo '******docker-compose已安装******';
 sh myshell.sh;
 fi
