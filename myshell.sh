@@ -35,6 +35,7 @@ url='https://lm93129.coding.net/p/mysave/d/mysave/git/raw/master'
 #安装基础组件
 if test $os == 1 ;then
 echo '******更新系统******';
+yum -y install http://opensource.wandisco.com/centos/7/git/x86_64/wandisco-git-release-7-2.noarch.rpm
 yum -y update;
 echo '******设定时区为上海时区******';
 cp -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime;
@@ -89,7 +90,9 @@ tee /etc/docker/daemon.json <<-'EOF'
   "max-concurrent-downloads": 10,
   "max-concurrent-uploads": 10,
   "registry-mirrors": [
-    "https://reg-mirror.qiniu.com"
+    "https://reg-mirror.qiniu.com",
+    "https://ustc-edu-cn.mirror.aliyuncs.com",
+    "https://fszmo1nj.mirror.aliyuncs.com"
     ]
 }
 EOF
