@@ -51,6 +51,8 @@ systemctl disable firewalld.service;
 echo '******安装git、curl、screen等基础组件******';
 yum -y install epel-release;
 yum -y install curl screen git nano vim htop unzip wget;
+echo fs.inotify.max_user_watches = 524288 | sudo tee -a /etc/sysctl.conf 
+sudo sysctl -p
 echo '******禁用SELinux******';
 sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config;
 setenforce 0;
@@ -120,6 +122,7 @@ echo '******设置源为淘宝源，并安装常用的pm2和yarn、pnpm******';
 npm config set registry https://registry.npmmirror.com/;
 npm -g install pm2 yarn pnpm;
 pnpm config set registry https://registry.npmmirror.com/;
+yarn config set registry https://registry.npmmirror.com/;
 echo '******安装完成,请重新连接虚拟机******';
 node -v;
 npm -v;
@@ -133,7 +136,7 @@ clear
 echo '******输入github账户，并确保改账户存在公钥******';
 read name
 echo '******自动从github读取公钥******';
-wget https://github.com/lm93129/SSHKEY_Installer/raw/master/key.sh --no-check-certificate&& bash key.sh $name;
+wget https://github.com/lm93129/SSHKEY_Installer/raw/master/key.sh --no-check-certificate && bash key.sh $name;
 sh myshell.sh;
 fi
 
